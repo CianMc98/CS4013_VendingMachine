@@ -16,10 +16,9 @@ public class Coin
       value = aValue; 
       name = aName;
    }
-   public double getValue()
-   {
-	   return value;
-   }
 
-   //ADD REMAINING CODE HERE
+	public double getValue() {
+		return value;
+	}
+
 }
