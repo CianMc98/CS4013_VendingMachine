@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.IOException;dsf
 /**
  * FileInputManager
  */
@@ -29,7 +29,7 @@ public class FileInputManager {
 
     public static ArrayList<LineItem> parseProductsToList() {
         ArrayList<LineItem> items = new ArrayList<>();
-        
+
         try {
             String products = readFromFile("Stock.txt");
 
@@ -51,7 +51,7 @@ public class FileInputManager {
 
     public static CoinSet parseMoneyToList() {
         CoinSet coinSet = new CoinSet();
-        
+
         try {
             String moneyString = readFromFile("Money.txt");
 
