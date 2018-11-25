@@ -14,11 +14,9 @@ public class FileOutputManager {
      * @param items ArrayList of LineItem type
      * @throws FileNotFoundException
      */
-    public static void writeProductsToFile(ArrayList<LineItem> items) throws FileNotFoundException{
+    public static void writeProductsToFile(ArrayList<LineItem> items) {
         File productFile = new File("Stock.txt");
-        if (!(productFile.exists())) {
-            throw new FileNotFoundException("Unable to find product file");
-        } else {
+        if (productFile.exists()) {
             try {
                 FileWriter writer = new FileWriter(productFile);
                 writer.write(parseProductListToString(items));
@@ -34,11 +32,9 @@ public class FileOutputManager {
      * @param coins CoinSet to write to file
      * @throws FileNotFoundException
      */
-    public static void writeMoneyToFile(CoinSet coins) throws FileNotFoundException {
+    public static void writeMoneyToFile(CoinSet coins) {
         File productFile = new File("Money.txt");
-        if (!(productFile.exists())) {
-            throw new FileNotFoundException("Unable to find Money file");
-        } else {
+        if (productFile.exists()) {
             try {
                 FileWriter writer = new FileWriter(productFile);
                 writer.write(parseMoneyListToString(coins));

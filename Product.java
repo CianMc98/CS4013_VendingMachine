@@ -1,33 +1,55 @@
 /**
-   A product in a vending machine.
-*/
-public class Product
-{
-   private String description;
-   private double price;
+ * Product
+ */
+public class Product {
+    private String description;
+    private double price; 
 
-   /**
-      Constructs a Product object
-      @param aDescription the description of the product
-      @param aPrice the price of the product
-   */
-   public Product(String aDescription, double aPrice)
-   {
-      description = aDescription;
-      price = aPrice;
-   }
+    Product (String description, double price) {
+        this.description = description;
+        this.price = price;
+    }
 
-   public String getDescription() {
-     return description;
-   }
+    // Accessors
+    /**
+     * @return the price
+     */
+    public double getPrice() {
+        return price;
+    }
+    
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-   public double getPrice() {
-     return price;
-   }
+    /**
+     * Returns string containing product info
+     * @return Product info
+     */
+    @Override
+    public String toString() {
+        return description + ", Euro: " + price;
+    }
 
-   public String toString() {
-     return ("Name:\t" + description + "\nPrice: \t" + price);
-   }
+    /**
+     * Check for equality between two Product objects
+     * @return <code>true if products are equal else <code>false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        //Check if self
+        if (obj == this) {
+            return true;
+        }
 
-	//ADD REMAINING CODE HERE
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+
+        Product temp = (Product)obj;
+        return ((description.equals(temp.getDescription())) && price == temp.getPrice());
+    }
 }
