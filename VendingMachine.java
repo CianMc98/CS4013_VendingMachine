@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -32,11 +33,20 @@ public class VendingMachine {
 
     public void buyProduct(LineItem p) {
         if (!(p.getQuantity() <= 0)) {
+            // If enough money has been entered into the machine
             if (currentCoins.getTotal() >= p.getProduct().getPrice()) {
-                for (Coin coin : currentCoins.getCoinSet()) {
-                    machineCoins.addCoin(coin);
+                // Get list of coins to make up price of product and add to machine coins
+                ArrayList<Coin> coins = convertValueToCoinList(p.getProduct().getPrice());
+                for (Coin c : coins) {
+                    machineCoins.addCoin(c);
                 }
+
+                coins = convertValueToCoinList(currentCoins.getTotal() - p.getProduct().getPrice());
                 currentCoins.clearSet();
+                for (Coin c : coins) {
+                    currentCoins.addCoin(c);
+                }
+                // Get remaining total of the inserted coins and set inserted coins to the new list
                 p.setQuantity(p.getQuantity() - 1);
             }
 
@@ -78,5 +88,44 @@ public class VendingMachine {
 
     public CoinSet getCoinSet() {
         return machineCoins;
+    }
+
+    // Converts a double value to an arrayist of coins to be used when buying products
+    private ArrayList<Coin> convertValueToCoinList(double value) {
+        BigDecimal v = new BigDecimal(Double.toString(value));
+        ArrayList<Coin> coins = new ArrayList<>();
+        coins.add(new Coin(0.05, "5 cent"));
+        coins.add(new Coin(0.1, "10 cent"));
+        coins.add(new Coin(0.5, "50 cent"));
+        coins.add(new Coin(1, "euro"));
+
+        ArrayList<Coin> outCoins = new ArrayList<Coin>();
+        Coin currentLargestCoin = getMostValuableCoinFromList(coins);
+        
+        while (v.compareTo(BigDecimal.valueOf(0)) != 0) {
+
+            if (v.compareTo(BigDecimal.valueOf(currentLargestCoin.getAmount())) >= 0) {
+                outCoins.add(currentLargestCoin);
+                v = v.subtract(new BigDecimal(Double.toString(currentLargestCoin.getAmount())));
+            } else {
+                coins.remove(currentLargestCoin);
+                if (coins.size() != 0) {
+                    currentLargestCoin = getMostValuableCoinFromList(coins);
+                }
+            }
+        }
+
+        return outCoins;
+    }
+
+    // Returns the coin with the hightest value from an arraylist
+    private Coin getMostValuableCoinFromList(ArrayList<Coin> set) {
+        Coin valuableCoin = set.get(0);
+        for (Coin c : set) {
+            if (c.getAmount() > valuableCoin.getAmount() ) {
+                valuableCoin = c;
+            }
+        }
+        return valuableCoin;
     }
 }

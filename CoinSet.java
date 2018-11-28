@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -22,13 +23,14 @@ public class CoinSet {
         set.clear();
     }
 
+    // Gets the total amount of money in the coinset as a double, uses bigdecimal for correct precision
     public double getTotal() {
-        double total = 0;
+        BigDecimal total = new BigDecimal(0);
         for (Coin c : set) {
-            total += c.getAmount();
+            total = total.add(new BigDecimal(Double.toString(c.getAmount())));
         }
 
-        return total;
+        return total.doubleValue();
     }
 
     public ArrayList<Coin> getCoinSet() {
