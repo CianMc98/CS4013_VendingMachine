@@ -8,16 +8,22 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import java.util.ArrayList;
 
-public class GUI extends Menu {
+public class GUI extends Application{
 
     Stage primaryStage;
     Button fail;
     StackPane layout;
     Button AddProducts = new Button("Add Product(s)");
     Button RemoveCoins = new Button("Remove Coins");
+    protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
+    protected Operator operator = new Operator();
 
-    public void run(VendingManager manager) {
+  @Override
+   public void start(Stage primaryStage)
+   {
+      VendingManager manager = new VendingManager();
 		//scene for adding coins
 		//Layout 1 - children laid out in vertical coloum
 			Scene coinScene;

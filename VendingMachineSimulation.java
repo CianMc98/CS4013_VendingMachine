@@ -17,15 +17,20 @@ import javafx.scene.control.*;
 public class VendingMachineSimulation extends Application {
 
     public static void main(String[] args) {
-        VendingManager manager = new VendingManager();
-        int choice = Menu.chooseMenuType();
-        if (choice == 1) {
-            CLI cliMenu = new CLI();
-            cliMenu.run(manager);
-        } else if (choice == 2) {
-          GUI guiMenu = new GUI();
-          launch(args);
-          guiMenu.run(manager);
-        }
+      launch(args);
     }
+
+    @Override
+     public void start(Stage primaryStage) {
+
+               int choice = Menu.chooseMenuType();
+               if (choice == 1) {
+                   VendingManager manager = new VendingManager();
+                   CLI cliMenu = new CLI();
+                   cliMenu.run(manager);
+               } else if (choice == 2) {
+                       GUI guiMenu = new GUI();
+                        guiMenu.start(primaryStage);
+               }
+     }
 }
