@@ -17,9 +17,6 @@ public class GUI extends Menu {
     Button AddProducts = new Button("Add Product(s)");
     Button RemoveCoins = new Button("Remove Coins");
 
-    public GUI() {
-    }
-
     public void run(VendingManager manager) {
 		//scene for adding coins
 		//Layout 1 - children laid out in vertical coloum
