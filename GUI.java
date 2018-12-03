@@ -13,6 +13,9 @@ public class GUI extends Menu {
 
     Stage primaryStage;
     Button fail;
+    StackPane layout;
+    Button AddProducts = new Button("Add Product(s)");
+    Button RemoveCoins = new Button("Remove Coins");
 
     public GUI() {
       start(primaryStage);
@@ -38,10 +41,8 @@ public class GUI extends Menu {
       fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
       EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
       EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
-      StackPane layout = new StackPane();
+      layout = new StackPane();
       layout.getChildren().addAll(EnterCoins, ViewProducts);
-      Scene scene = new Scene(layout, 300, 250);
-      primaryStage.setScene(scene);
     }
 
     public void run(VendingManager manager) {
@@ -60,10 +61,14 @@ public class GUI extends Menu {
         int operatorLevel = operator.getType();
 
             if (operatorLevel == 1) {
-                System.out.println("S)how products  I)nsert coin  B)uy  A)dd Products  Q)uit");
+                layout.getChildren().add(AddProducts);
+                Scene scene = new Scene(layout, 300, 250);
+                primaryStage.setScene(scene);
                 primaryStage.show();
             } else if (operatorLevel == 2) {
-                System.out.println("S)how products  I)nsert coin  B)uy  A)dd Products R)emove Coins  Q)uit");
+                layout.getChildren().addAll(AddProducts, RemoveCoins);
+                Scene scene = new Scene(layout, 300, 250);
+                primaryStage.setScene(scene);
                 primaryStage.show();
             }
 
@@ -77,8 +82,9 @@ public class GUI extends Menu {
 
     private void displayDefaultMenu(VendingManager manager) {
         boolean more = true;
+        Scene scene = new Scene(layout, 300, 250);
+        primaryStage.setScene(scene);
         primaryStage.show();
-
 
         while (more) {
 
