@@ -16,11 +16,11 @@ public class FileInputManager {
     private static String readFromFile(String fileName) throws IOException {
         File file = new File(fileName);
         String in = "";
-        
+
         try {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
-                in += reader.nextLine() + "\n";
+                 in += reader.nextLine() + "\n";
             }
 
             reader.close();
@@ -31,8 +31,8 @@ public class FileInputManager {
         return in;
     }
 
-    public static ArrayList<LineItem> getProductList() {
-        ArrayList<LineItem> items = new ArrayList<>();
+    public static ArrayList < LineItem > getProductList() {
+        ArrayList < LineItem > items = new ArrayList < > ();
 
         try {
             String products = readFromFile("Stock.txt");
@@ -42,7 +42,7 @@ public class FileInputManager {
                 // Split product string so each line can be converted to a LineItem
                 String[] lineItemStrings = products.split("\n");
 
-                for (String s : lineItemStrings) {
+                for (String s: lineItemStrings) {
                     // Split into seperate parts and create object in list
                     String[] tmp = s.split(",");
                     Product p = new Product(tmp[0], Double.parseDouble(tmp[1]));
@@ -66,7 +66,7 @@ public class FileInputManager {
                 // Split product string so each line can be converted to a LineItem
                 String[] coinStrings = moneyString.split("\n");
 
-                for (String s : coinStrings) {
+                for (String s: coinStrings) {
                     // Create coins and add as by amount based on quantity
                     String[] tmp = s.split(",");
                     Coin c = new Coin(Double.parseDouble(tmp[1]), tmp[0]);
@@ -82,4 +82,29 @@ public class FileInputManager {
 
         return coinSet;
     }
+
+    public static ArrayList <Operator> getOperatorList() {
+        ArrayList <Operator> operatorList  = new ArrayList<Operator>();
+           
+        try{
+            String operatorfile = readFromFile("Operators.txt");
+            
+            if(operatorfile.length() > 0) {
+
+                String [] operatorStrings = operatorfile.split("\n");
+
+                for(String o: operatorStrings) {
+
+                    String [] tmp = o.split(",");
+                    operatorList.add(new Operator(tmp[0], Integer.parseInt(tmp[1])));
+                }
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return operatorList;
+    }                
+          
+    
 }
