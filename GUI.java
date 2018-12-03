@@ -18,10 +18,9 @@ public class GUI extends Menu {
     Button RemoveCoins = new Button("Remove Coins");
 
     public GUI() {
-      start(primaryStage);
     }
 
-    public void start(Stage primaryStage) {
+    public void run(VendingManager manager) {
 		//scene for adding coins
 		//Layout 1 - children laid out in vertical coloum
 			Scene coinScene;
@@ -43,9 +42,7 @@ public class GUI extends Menu {
       EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
       layout = new StackPane();
       layout.getChildren().addAll(EnterCoins, ViewProducts);
-    }
 
-    public void run(VendingManager manager) {
       boolean end = false;
       while (!end) {
         if (operator.getType() == 0) {

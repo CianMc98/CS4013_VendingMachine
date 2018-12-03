@@ -15,8 +15,8 @@ public class VendingMachineSimulation {
 
 
         } else if (choice == 2) {
-            /*  GUI guiMenu= new GUI();
-            guiMenu.run(manager); */
+          GUI guiMenu = new GUI();
+          guiMenu.run(manager);
         }
     }
 }
