@@ -248,13 +248,12 @@ public class GUI extends Application {
 
  public void setDisplay(int index, HBox box, ArrayList < String > productNames, ArrayList < Double > productPrices) {
   Button back = new Button("Back");
-  back.setOnAction(e -> primary.setScene(scene));
+  			back.setOnAction(e -> primary.setScene(scene1));
   Button buy = new Button("Buy");
   LineItem[] lineItems = manager.getProductTypes();
-  buy.setOnAction(e -> {
-   manager.buyItem(lineItems[index]);
-   primary.setScene(scene);
-  });
+  buy.setOnAction(e -> {  AlertBox.display("Bought", "You have successfully purchased the product");
+                         primary.setScene(scene1);
+                          manager.buyItem(lineItems[index]);});
   Label name = new Label(productNames.get(index));
   Label nameIndicator = new Label("    Name: ");
   Label priceIndicator = new Label("    Price: $");
