@@ -62,6 +62,7 @@ public class CLI {
                 try {
                     LineItem p = (LineItem) getChoice(manager.getProductTypes());
                     manager.buyItem(p);
+                    System.out.println("Item has been purchased");
                 } catch (VendingException ex) {
                     System.out.println(ex.getMessage());
                 }
