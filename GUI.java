@@ -121,7 +121,7 @@ public class GUI extends Application {
    GridPane.setConstraints(operatorCode, 0, 0); //place label in first column of first row
    GridPane.setConstraints(back, 1, 2);
    TextField input = new TextField(); 
-   input.setPromptText("012786");
+   input.setPromptText("0123");
    GridPane.setConstraints(input, 1, 0); //place input in second column of first row
    Button login = new Button("login");
    GridPane.setConstraints(login, 1, 1);
