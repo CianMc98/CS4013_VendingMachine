@@ -36,7 +36,11 @@ public class VendingManager {
 
 		LineItem[] arr = new LineItem[machine.getItemList().size()];
 		return machine.getItemList().toArray(arr);
+	}
 
+	public ArrayList<LineItem> getProductList() {
+
+		return machine.getItemList();
 	}
 
 	public void removeMoney() {
@@ -46,6 +50,10 @@ public class VendingManager {
 
 	public void buyItem(LineItem l) throws VendingException {
 		machine.buyProduct(l);
+	}
+
+	public void buyItem(int index) throws VendingException {
+		machine.buyProduct(getProductList().get(index));
 	}
 
 	public void addItem(String description, double price, int quantity) {
