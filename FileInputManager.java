@@ -60,7 +60,7 @@ public class FileInputManager {
         CoinSet coinSet = new CoinSet();
 
         try {
-            String moneyString = readFromFile("Money.txt");
+            String moneyString = readFromFile("Balance.txt");
 
             if (moneyString.length() > 0) {
                 // Split product string so each line can be converted to a LineItem
@@ -90,11 +90,9 @@ public class FileInputManager {
             String operatorfile = readFromFile("Operators.txt");
             
             if(operatorfile.length() > 0) {
-
                 String [] operatorStrings = operatorfile.split("\n");
 
                 for(String o: operatorStrings) {
-
                     String [] tmp = o.split(",");
                     operatorList.add(new Operator(tmp[0], Integer.parseInt(tmp[1])));
                 }
@@ -106,5 +104,27 @@ public class FileInputManager {
         return operatorList;
     }                
           
-    
+    public static Coin[] getCoinTypes() {
+        Coin[] coinTypes = null;
+
+        try {
+            String coinFileString = readFromFile("Money.txt");
+
+            if (coinFileString.length() > 0) {
+                String[] coinStrings = coinFileString.split("\n");
+                coinTypes = new Coin[coinStrings.length];
+
+                for (int i = 0; i < coinStrings.length; i++) {
+                    String[] coinInfo = coinStrings[i].split(",");
+                    coinTypes[i] = new Coin(Double.parseDouble(coinInfo[1]), coinInfo[0]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return coinTypes;
+    }
 }
