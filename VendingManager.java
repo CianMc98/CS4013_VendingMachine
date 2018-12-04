@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class VendingManager {
 	VendingMachine machine;
 
@@ -15,6 +16,20 @@ public class VendingManager {
 			y += p.getProduct().toString() + "\n";
 		return y;
 
+	}
+
+	public ArrayList<String> showProductNames() {
+		ArrayList<String> y = new ArrayList<>();
+		for (LineItem p : getProductTypes())
+			y.add(p.getProduct().getDescription());
+		return y;
+	}
+
+	public ArrayList<Double> showProductPrices() {
+		ArrayList<Double> y = new ArrayList<>();
+		for (LineItem p : getProductTypes())
+			y.add(p.getProduct().getPrice());
+		return y;
 	}
 
 	public LineItem[] getProductTypes() {
