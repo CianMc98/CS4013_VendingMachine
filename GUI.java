@@ -14,7 +14,7 @@ public class GUI extends Application{
 
     Stage primaryStage;
     Button fail;
-    StackPane layout;
+    VBox layout;
     Button AddProducts = new Button("Add Product(s)");
     Button RemoveCoins = new Button("Remove Coins");
     protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
@@ -44,7 +44,7 @@ public class GUI extends Application{
       fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
       EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
       EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
-      layout = new StackPane();
+      layout = new VBox();
       layout.getChildren().addAll(EnterCoins, ViewProducts);
 
       boolean end = false;
@@ -55,6 +55,7 @@ public class GUI extends Application{
           displayOperatorMenu(manager);
         }
       }
+      Platform.exit();
     } catch(Exception e) {
       e.printStackTrace();
     }
