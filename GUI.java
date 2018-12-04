@@ -55,14 +55,15 @@ public class GUI extends Application {
    primary.setTitle("Vending Machine");
    fail = new Button("Click Me");
    Button EnterCoins = new Button("Insert Coins");
-   Button ViewProducts = new Button("View Products");
+   Button viewProduct = new Button("View Products");
    Button changeOperator = new Button("Change Operator");
    changeOperator.setOnAction(e -> primary.setScene(operatorScene));
    Button quit = new Button("Quit");
    fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
    EnterCoins.setOnAction(e -> primary.setScene(coinScene));
+   viewProduct.setOnAction(e -> ViewProducts(primary));
    MainLayout = new VBox();
-   MainLayout.getChildren().addAll(EnterCoins, ViewProducts, changeOperator, quit);
+   MainLayout.getChildren().addAll(EnterCoins, viewProduct, changeOperator, quit);
 
    //Change operator
    GridPane operatorPane = new GridPane();
