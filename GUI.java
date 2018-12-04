@@ -120,7 +120,7 @@ public class GUI extends Application {
    Label operatorCode = new Label("Enter Operator Code: ");
    GridPane.setConstraints(operatorCode, 0, 0); //place label in first column of first row
    GridPane.setConstraints(back, 1, 2);
-   TextField input = new TextField();
+   TextField input = new TextField(); 
    input.setPromptText("012786");
    GridPane.setConstraints(input, 1, 0); //place input in second column of first row
    Button login = new Button("login");
