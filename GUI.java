@@ -22,7 +22,7 @@ public class GUI extends Application {
 
  Stage primary;
  Button fail;
- Scene opScene, scene1, scene, coinScene, viewProducts, productsScene;
+ Scene opScene, scene1, scene, coinScene, viewProducts, productScene;
  VBox MainLayout;
  Button AddProducts = new Button("Add Product(s)");
  Button RemoveCoins = new Button("Remove Coins");
