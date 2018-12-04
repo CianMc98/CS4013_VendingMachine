@@ -14,7 +14,7 @@ public class GUI extends Application{
 
     Stage primary;
     Button fail;
-    VBox layout;
+    VBox MainLayout;
     Button AddProducts = new Button("Add Product(s)");
     Button RemoveCoins = new Button("Remove Coins");
     protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
@@ -34,9 +34,9 @@ public class GUI extends Application{
 			Button euro = new Button("1 euro");
 			Button twoEuro = new Button("2 euro");
 			Label label1 = new Label("Enter your coin");
-      VBox layout1 = new VBox(20);
-      layout1.getChildren().addAll(label1,fiftyCent,twentyCent,euro,twoEuro);
-      coinScene = new Scene(layout1, 200, 200);
+      VBox coinLayout = new VBox(20);
+      coinLayout.getChildren().addAll(label1,fiftyCent,twentyCent,euro,twoEuro);
+      coinScene = new Scene(coinLayout, 200, 200);
 
       primary.setTitle("Vending Machine");
       fail = new Button("Click Me");
@@ -45,8 +45,8 @@ public class GUI extends Application{
       fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
       EnterCoins.setOnAction(e -> primary.setScene(coinScene));
       EnterCoins.setOnAction(e -> primary.setScene(coinScene));
-      layout = new VBox();
-      layout.getChildren().addAll(EnterCoins, ViewProducts);
+     MainLayout = new VBox();
+     MainLayout.getChildren().addAll(EnterCoins, ViewProducts);
 
       boolean end = false;
       while (!end) {
@@ -67,13 +67,13 @@ public class GUI extends Application{
         int operatorLevel = operator.getType();
         try{
             if (operatorLevel == 1) {
-                layout.getChildren().add(AddProducts);
-                Scene scene = new Scene(layout, 300, 250);
+               MainLayout.getChildren().add(AddProducts);
+                Scene scene = new Scene(MainLayout, 300, 250);
                 primary.setScene(scene);
                 primary.show();
             } else if (operatorLevel == 2) {
-                layout.getChildren().addAll(AddProducts, RemoveCoins);
-                Scene scene = new Scene(layout, 300, 250);
+               MainLayout.getChildren().addAll(AddProducts, RemoveCoins);
+                Scene scene = new Scene(MainLayout, 300, 250);
                 primary.setScene(scene);
                 primary.show();
             }
@@ -91,7 +91,7 @@ public class GUI extends Application{
 
     private void displayDefaultMenu(VendingManager manager) {
         boolean more = true;
-        Scene scene1 = new Scene(layout, 300, 250);
+        Scene scene1 = new Scene(MainLayout, 300, 250);
         try {
           primary.setScene(scene1);
         primary.show();
