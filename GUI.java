@@ -30,9 +30,9 @@ public class GUI extends Application {
  protected VendingManager manager = new VendingManager();
  protected Operator operator = new Operator();
  private Coin fifty = new Coin(0.5, ".5e");
- private Coin twenty = new Coin(0.2, ".2e");
+ private Coin ten = new Coin(0.1, ".1e");
  private Coin oneE = new Coin(1.0, "1e");
- private Coin twoE = new Coin(2.0, "2e");
+ private Coin fiveC = new Coin(0.05, "0.05e");
  //manager.insertCoin((Coin) getChoice(coins));
 
 
@@ -46,12 +46,12 @@ public class GUI extends Application {
    getCurrentTotal.setOnAction(e -> AlertBox.display("Success", getTotalCoins()));
    Button fiftyCent = new Button("50 cent");
    fiftyCent.setOnAction(e -> manager.insertCoin(fifty));
-   Button twentyCent = new Button("20 cent");
-   twentyCent.setOnAction(e -> manager.insertCoin(twenty));
+   Button tenCent = new Button("10 cent");
+   tenCent.setOnAction(e -> manager.insertCoin(ten));
    Button euro = new Button("1 euro");
    euro.setOnAction(e -> manager.insertCoin(oneE));
-   Button twoEuro = new Button("2 euro");
-   twoEuro.setOnAction(e -> manager.insertCoin(twoE));
+   Button fiveCent = new Button("5 Cent");
+   fiveCent.setOnAction(e -> manager.insertCoin(fiveC));
    Button back = new Button("Back");
    Button back1 = new Button("Back");
    Button backProducts = new Button("Back");
@@ -61,7 +61,7 @@ public class GUI extends Application {
 
    Label label1 = new Label("Enter your coin");
    VBox coinLayout = new VBox(20);
-   coinLayout.getChildren().addAll(label1, fiftyCent, twentyCent, euro, twoEuro, back1, getCurrentTotal);
+   coinLayout.getChildren().addAll(label1, fiveCent, tenCent, fiftyCent, euro, back1, getCurrentTotal);
    coinScene = new Scene(coinLayout, 300, 300);
 
    primary.setTitle("Vending Machine");
