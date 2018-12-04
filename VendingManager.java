@@ -44,7 +44,7 @@ public class VendingManager {
 	}
 
 	public void removeMoney() {
-		System.out.println("Removed: " + machine.removeMoney());
+		System.out.println("Coins removed, Remaining Balance: " + machine.removeMoney());
 
 	}
 
