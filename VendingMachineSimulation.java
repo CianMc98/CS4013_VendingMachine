@@ -25,7 +25,7 @@ public class VendingMachineSimulation{
             CLI cliMenu = new CLI();
             cliMenu.run(manager);
             chosen = true;
-          } else if(choice.matches("C)) {
+          } else if(choice.matches("C")) {
             chosen = true;
           }
         }
