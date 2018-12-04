@@ -27,17 +27,4 @@ public class VendingMachineSimulation{
     }
     }
 
-    // @Override
-    //  public void start(Stage primaryStage) {
-    //
-    //        int choice = Menu.chooseMenuType();
-    //            if (choice == 1) {
-    //                VendingManager manager = new VendingManager();
-    //                CLI cliMenu = new CLI();
-    //                cliMenu.run(manager);
-    //            } else if (choice == 2) {
-    //                    GUI guiMenu = new GUI();
-    //                     guiMenu.start(primaryStage);
-    //            }
-    //  }
 }
