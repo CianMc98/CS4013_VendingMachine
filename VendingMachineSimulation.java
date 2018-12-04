@@ -1,30 +1,31 @@
 import java.util.*;
 import java.io.*;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import java.util.Scanner;
+import java.util.ArrayList;
 import javafx.application.*;
-import javafx.stage.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-
 /**
    This program simulates a vending machine.
 */
 public class VendingMachineSimulation{
 
     public static void main(String[] args) {
-      int choice = Menu.chooseMenuType();
-                if (choice == 1) {
-                    VendingManager manager = new VendingManager();
-                    CLI cliMenu = new CLI();
-                    cliMenu.run(manager);
-                } else if (choice == 2) {
-      Application.launch(GUI.class, args);
-    }
-    }
+      boolean chosen = false;
+      int x = 0;
+        while (!chosen) {
+          System.out.println("Would you like to use A) GUI or B) CLI");
+          Scanner sc = new Scanner(System.in);
 
+          String choice = sc.nextLine().toUpperCase();
+
+          if (choice.matches("A")) {
+            Application.launch(GUI.class, args);
+            chosen = true;
+          } else if (choice.matches("B")) {
+            VendingManager manager = new VendingManager();
+            CLI cliMenu = new CLI();
+            cliMenu.run(manager);
+            chosen = true;
+          }
+        }
+    }
 }

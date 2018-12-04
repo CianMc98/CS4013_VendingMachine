@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * A menu from the vending machine.
@@ -12,6 +13,8 @@ public class CLI extends Menu {
         new Coin(0.5, "50 cent"),
         new Coin(1, "euro")
     };
+    protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
+    protected Operator operator = new Operator();
 
     /**
      * Constructs a VendingMachineMenu object
