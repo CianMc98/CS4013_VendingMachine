@@ -31,7 +31,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return description + ", Euro: " + price;
+        return description + ", Price: " + price;
     }
 
     /**

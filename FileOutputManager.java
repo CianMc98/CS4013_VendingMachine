@@ -33,7 +33,7 @@ public class FileOutputManager {
      * @throws FileNotFoundException
      */
     public static void writeMoneyToFile(CoinSet coins) {
-        File productFile = new File("Money.txt");
+        File productFile = new File("Balance.txt");
         if (productFile.exists()) {
             try {
                 FileWriter writer = new FileWriter(productFile);
@@ -69,10 +69,11 @@ public class FileOutputManager {
     */
     private static String parseMoneyListToString(CoinSet coins) {
         String s = "";
+        int size = FileInputManager.getCoinTypes().length;
         ArrayList<Coin> cArray = coins.getCoinSet();
         // Count coins in the coin set
         Coin previousCoin = null;
-        for (int i = 0; i < cArray.size(); i++) {
+        for (int i = 0; i < size; i++) {
             Coin c = cArray.get(i);
             // Skip counting if it has already been counted
             if (!(c.equals(previousCoin))) {
@@ -85,7 +86,7 @@ public class FileOutputManager {
                 }
                 s += c.toString() + "," + count + "\n";
                 previousCoin = c;
-            } 
+            }
        }
 
        return s;

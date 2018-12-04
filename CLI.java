@@ -1,28 +1,27 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * A menu from the vending machine.
  */
-public class CLI extends Menu {
+public class CLI {
     private Scanner in ;
-    private static Coin[] coins = {
-        new Coin(0.05, "5 cent"),
-        new Coin(0.1, "10 cent"),
-        new Coin(0.5, "50 cent"),
-        new Coin(1, "euro")
-    };
-    protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
-    protected Operator operator = new Operator();
+    boolean end = false; // Ends the run function
+    private static Coin[] coins;
+    private ArrayList<Operator> operatorList;
+    private Operator operator;
 
     /**
      * Constructs a VendingMachineMenu object
      */
-    public CLI() { in = new Scanner(System.in);
+    public CLI() { 
+        in = new Scanner(System.in);
+        coins = FileInputManager.getCoinTypes();
+        operatorList = FileInputManager.getOperatorList();
+        operator = new Operator();
     }
 
-    boolean end = false;
 
     /**
      * Runs the vending machine system.
@@ -45,9 +44,9 @@ public class CLI extends Menu {
 
         while (more) {
             if (operatorLevel == 1) {
-                System.out.println("S)how products  I)nsert coin  B)uy  A)dd Products  Q)uit");
+                System.out.println("S)how products  I)nsert coin  B)uy  D)isplay balance A)dd Products  Q)uit");
             } else if (operatorLevel == 2) {
-                System.out.println("S)how products  I)nsert coin  B)uy  A)dd Products R)emove Coins  Q)uit");
+                System.out.println("S)how products  I)nsert coin  B)uy  D)isplay balance A)dd Products R)emove Coins  Q)uit");
             }
 
             String command = in .nextLine().toUpperCase();
@@ -74,6 +73,8 @@ public class CLI extends Menu {
                 System.out.println("Quantity:");
                 int quantity = in .nextInt(); in .nextLine(); // read the new-line character
                 manager.addItem(description, price, quantity);
+            } else if (command.equals("D")) {
+                System.out.println("Balance : " + manager.getCurrentBalance());
             } else if (command.equals("Q")) {
                 more = false;
                 end = true;
@@ -89,7 +90,7 @@ public class CLI extends Menu {
 
 
         while (more) {
-            System.out.println("S)how products  I)nsert coin  B)uy  C)hange Operator  Q)uit");
+            System.out.println("S)how products  I)nsert coin  B)uy  C)hange Operator  D)isplay balance Q)uit");
 
             String command = in .nextLine().toUpperCase();
 
@@ -106,17 +107,28 @@ public class CLI extends Menu {
                     System.out.println(ex.getMessage());
                 }
             } else if (command.equals("C")) {
+                boolean isChanged = false;
                 System.out.println("Enter Operator code");
                 Scanner op = new Scanner(System.in);
                 String passcode = op.nextLine();
-
+                // Check to see if input passcode equals an operator passcode in the list
                 for (Operator o: operatorList) {
                     if (o.getPasscode().equals(passcode)) {
                         operator = o;
+                        isChanged = true;
                     }
                 }
+
+                if(isChanged) {
+                    System.out.println("Logging in as level " + operator.getType() + " operator");
+                } else {
+                    System.out.println("Incorrect password, log in failed!");
+                }
+                // Reloads the CLI but does not quit the program
                 more = false;
 
+            } else if (command.equals("D")) {
+                System.out.println("Balance : " + manager.getCurrentBalance());
             } else if (command.equals("Q")) {
                 more = false;
                 end = true;

@@ -1,13 +1,14 @@
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A vending machine.
  */
 public class VendingMachine {
     private ArrayList<LineItem> items;
-    public CoinSet machineCoins;
-    public CoinSet currentCoins;
+    private CoinSet machineCoins;
+    private CoinSet currentCoins;
 
     /**
      * Constructs a VendingMachine object.
@@ -17,7 +18,6 @@ public class VendingMachine {
         machineCoins = FileInputManager.getCoinSet();
         currentCoins = new CoinSet();
     }
-    // ADD REMAINING CODE HERE
 
     public double removeMoney() {
         double x = machineCoins.getTotal();
@@ -90,15 +90,15 @@ public class VendingMachine {
         return machineCoins;
     }
 
+    public CoinSet getCurrentCoinSet() {
+        return currentCoins;
+    }
+
     // Converts a double value to an arrayist of coins to be used when buying products
     private ArrayList<Coin> convertValueToCoinList(double value) {
         BigDecimal v = new BigDecimal(Double.toString(value));
-        ArrayList<Coin> coins = new ArrayList<>();
-        coins.add(new Coin(0.05, "5 cent"));
-        coins.add(new Coin(0.1, "10 cent"));
-        coins.add(new Coin(0.5, "50 cent"));
-        coins.add(new Coin(1, "euro"));
 
+        ArrayList<Coin> coins = new ArrayList<Coin>(Arrays.asList(FileInputManager.getCoinTypes()));
         ArrayList<Coin> outCoins = new ArrayList<Coin>();
         Coin currentLargestCoin = getMostValuableCoinFromList(coins);
         

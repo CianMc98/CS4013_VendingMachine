@@ -37,6 +37,9 @@ public class VendingManager {
 		machine.addProduct(new LineItem(new Product(description, price), quantity));
 	}
 
+	public double getCurrentBalance() {
+		return machine.getCurrentCoinSet().getTotal();
+	}
 	public void writeAllDataToFiles() {
 		FileOutputManager.writeMoneyToFile(machine.getCoinSet());
 		FileOutputManager.writeProductsToFile(machine.getItemList());
