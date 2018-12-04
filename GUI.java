@@ -21,7 +21,7 @@ public class GUI extends Application {
 
  Stage primary;
  Button fail;
- Scene operatorScene, scene;
+ Scene operatorScene, scene,scene1;
  VBox MainLayout;
  Button AddProducts = new Button("Add Product(s)");
  Button RemoveCoins = new Button("Remove Coins");
@@ -30,28 +30,40 @@ public class GUI extends Application {
  protected VendingManager manager = new VendingManager();
  protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
  protected Operator operator = new Operator();
+ private Coin fifty = new Coin(0.5,".5e");
+ private Coin twenty = new Coin(0.2,".2e");
+ private Coin oneE = new Coin(1.0,"1e");
+ private Coin twoE = new Coin(2.0,"2e");
 
- @Override
- public void start(Stage primaryStage) {
-  try {
-   primary = primaryStage;
-   VendingManager manager = new VendingManager();
-   //scene for adding coins
-   //Layout 1 - children laid out in vertical coloum
-   Scene coinScene;
-   Button fiftyCent = new Button("50 cent");
-   Button twentyCent = new Button("20 cent");
-   Button euro = new Button("1 euro");
-   Button twoEuro = new Button("2 euro");
-   Button back = new Button("Back");
-   Button back1 = new Button("Back");
-   back.setOnAction(e -> primary.setScene(scene));
-   back1.setOnAction(e -> primary.setScene(scene));
-   Label label1 = new Label("Enter your coin");
-   VBox coinLayout = new VBox(20);
-   coinLayout.getChildren().addAll(label1, fiftyCent, twentyCent, euro, twoEuro, back1);
-   coinScene = new Scene(coinLayout, 300, 300);
-
+  @Override
+   public void start(Stage primaryStage)
+   {
+     primary = primaryStage;
+     try{
+      VendingManager manager = new VendingManager();
+		//scene for adding coins
+		//Layout 1 - children laid out in vertical coloum
+			Scene coinScene;
+			Button getCurrentTotal = new Button("getTotal");
+			getCurrentTotal.setOnAction(e -> System.out.println(manager.getCurrentBalance()));
+			Button fiftyCent = new Button("50 cent");
+			fiftyCent.setOnAction(e -> manager.insertCoin(fifty));
+			Button twentyCent = new Button("20 cent");
+			twentyCent.setOnAction(e -> manager.insertCoin(twenty));
+			Button euro = new Button("1 euro");
+			euro.setOnAction(e -> manager.insertCoin(oneE));
+			Button twoEuro = new Button("2 euro");
+			twoEuro.setOnAction(e -> manager.insertCoin(twoE));
+			Button back = new Button("Back");
+			Button back1 = new Button("Back");
+			Button back2 = new Button("Back");
+			back.setOnAction(e -> primary.setScene(scene));
+			back1.setOnAction(e -> primary.setScene(scene));
+			back2.setOnAction(e -> primary.setScene(scene));
+			Label label1 = new Label("Enter your coin");
+      VBox coinLayout = new VBox(20);
+      coinLayout.getChildren().addAll(label1,fiftyCent,twentyCent,euro,twoEuro,back1,getCurrentTotal);
+      coinScene = new Scene(coinLayout, 300, 300);
    primary.setTitle("Vending Machine");
    fail = new Button("Click Me");
    Button EnterCoins = new Button("Insert Coins");
@@ -59,6 +71,7 @@ public class GUI extends Application {
    Button changeOperator = new Button("Change Operator");
    changeOperator.setOnAction(e -> primary.setScene(operatorScene));
    Button quit = new Button("Quit");
+   quit.setOnAction(e -> primary.close());
    fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
    EnterCoins.setOnAction(e -> primary.setScene(coinScene));
    viewProduct.setOnAction(e -> ViewProducts(primary));
