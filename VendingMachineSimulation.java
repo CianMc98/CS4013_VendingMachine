@@ -12,7 +12,7 @@ public class VendingMachineSimulation{
       boolean chosen = false;
       int x = 0;
         while (!chosen) {
-          System.out.println("Would you like to use A) GUI or B) CLI");
+          System.out.println("Would you like to use A) GUI or B) CLI or C) Quit");
           Scanner sc = new Scanner(System.in);
 
           String choice = sc.nextLine().toUpperCase();
@@ -24,6 +24,8 @@ public class VendingMachineSimulation{
             VendingManager manager = new VendingManager();
             CLI cliMenu = new CLI();
             cliMenu.run(manager);
+            chosen = true;
+          } else if(choice.matches("C)) {
             chosen = true;
           }
         }
