@@ -40,13 +40,15 @@ public class GUI extends Application{
 
       primary.setTitle("Vending Machine");
       fail = new Button("Click Me");
-      Button EnterCoins = new Button("Enter Coins");
+      Button EnterCoins = new Button("Insert Coins");
       Button ViewProducts = new Button("View Products");
+      Button changeOperator = new Button("Change Operator");
+      Button quit = new Button("Quit");
       fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
       EnterCoins.setOnAction(e -> primary.setScene(coinScene));
       EnterCoins.setOnAction(e -> primary.setScene(coinScene));
      MainLayout = new VBox();
-     MainLayout.getChildren().addAll(EnterCoins, ViewProducts);
+     MainLayout.getChildren().addAll(EnterCoins, ViewProducts, changeOperator, quit);
 
       boolean end = false;
       while (!end) {
@@ -94,7 +96,7 @@ public class GUI extends Application{
         Scene scene1 = new Scene(MainLayout, 300, 250);
         try {
           primary.setScene(scene1);
-        primary.show();
+          primary.show();
 
         while (more) {
 
