@@ -19,10 +19,11 @@ public class GUI extends Application{
     Button RemoveCoins = new Button("Remove Coins");
     protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
     protected Operator operator = new Operator();
-
   @Override
-   public void start(Stage primaryStage)
+   public void start(Stage primary)
    {
+     primaryStage = primary;
+     try{
       VendingManager manager = new VendingManager();
 		//scene for adding coins
 		//Layout 1 - children laid out in vertical coloum
@@ -54,12 +55,15 @@ public class GUI extends Application{
           displayOperatorMenu(manager);
         }
       }
+    } catch(Exception e) {
+      e.printStackTrace();
+    }
     }
 
     private void displayOperatorMenu(VendingManager manager) {
         boolean more = true;
         int operatorLevel = operator.getType();
-
+        try{
             if (operatorLevel == 1) {
                 layout.getChildren().add(AddProducts);
                 Scene scene = new Scene(layout, 300, 250);
@@ -79,11 +83,15 @@ public class GUI extends Application{
 
             }
         }
+      catch(Exception e){
+        e.printStackTrace();
+      }}
 
     private void displayDefaultMenu(VendingManager manager) {
         boolean more = true;
-        Scene scene = new Scene(layout, 300, 250);
-        primaryStage.setScene(scene);
+        Scene scene1 = new Scene(layout, 300, 250);
+        try {
+          primaryStage.setScene(scene1);
         primaryStage.show();
 
         while (more) {
@@ -96,5 +104,8 @@ public class GUI extends Application{
                 manager.writeAllDataToFiles();
 
             }
+        } catch (Exception e) {
+          e.printStackTrace();
         }
+      }
     }
