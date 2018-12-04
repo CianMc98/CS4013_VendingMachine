@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -21,7 +22,6 @@ import javafx.scene.layout.BorderPane;
 public class GUI extends Application {
 
  Stage primary;
- Button fail;
  Scene opScene, scene1, scene, coinScene, viewProducts, productScene;
  VBox MainLayout;
  Button AddProducts = new Button("Add Product(s)");
@@ -33,7 +33,7 @@ public class GUI extends Application {
  private Coin ten = new Coin(0.1, ".1e");
  private Coin oneE = new Coin(1.0, "1e");
  private Coin fiveC = new Coin(0.05, "0.05e");
- //manager.insertCoin((Coin) getChoice(coins));
+
 
 
  @Override
@@ -42,8 +42,8 @@ public class GUI extends Application {
   try {
    //scene for adding coins
    //Layout 1 - children laid out in vertical coloum
-   Button getCurrentTotal = new Button("Current Total");
-   getCurrentTotal.setOnAction(e -> AlertBox.display("Success", getTotalCoins()));
+   Button getCurrentTotal = new Button("Total Coins");
+   getCurrentTotal.setOnAction(e -> AlertBox.display("Total Coins", getTotalCoins()));
    Button fiftyCent = new Button("50 cent");
    fiftyCent.setOnAction(e -> manager.insertCoin(fifty));
    Button tenCent = new Button("10 cent");
@@ -59,29 +59,28 @@ public class GUI extends Application {
    back1.setOnAction(e -> primary.setScene(scene1));
    backProducts.setOnAction(e -> primary.setScene(scene1));
 
-   Label label1 = new Label("Enter your coin");
+   Label label1 = new Label("Enter the coins needed for your product");
    VBox coinLayout = new VBox(20);
-   coinLayout.getChildren().addAll(label1, fiveCent, tenCent, fiftyCent, euro, back1, getCurrentTotal);
+   coinLayout.setAlignment(Pos.CENTER);
+   coinLayout.getChildren().addAll(label1, fiveCent, tenCent, fiftyCent, euro, getCurrentTotal, back1);
    coinScene = new Scene(coinLayout, 300, 300);
 
    primary.setTitle("Vending Machine");
-   fail = new Button("Click Me");
    Button EnterCoins = new Button("Insert Coins");
    Button viewProducts = new Button("View Products");
    viewProducts.setOnAction(e -> ViewProducts(primary));
    Button changeOperator = new Button("Change Operator");
    changeOperator.setOnAction(e -> primary.setScene(opScene));
    Button quit = new Button("Quit");
-   quit.setOnAction(e -> primary.close());
-   fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
+   quit.setOnAction(e -> { manager.writeAllDataToFiles(); primary.close();});
+
    EnterCoins.setOnAction(e -> primary.setScene(coinScene));
    MainLayout = new VBox();
+   MainLayout.setAlignment(Pos.CENTER);
+   MainLayout.setSpacing(5);
    MainLayout.getChildren().addAll(EnterCoins, viewProducts, changeOperator, quit);
 
    RemoveCoins.setOnAction(e -> manager.removeMoney());
-
-
-
    AddProducts.setOnAction(e -> primary.setScene(productScene));
 
    GridPane productsPane = new GridPane();
@@ -120,10 +119,10 @@ public class GUI extends Application {
    Label operatorCode = new Label("Enter Operator Code: ");
    GridPane.setConstraints(operatorCode, 0, 0); //place label in first column of first row
    GridPane.setConstraints(back, 1, 2);
-   TextField input = new TextField(); 
+   TextField input = new TextField();
    input.setPromptText("0123");
    GridPane.setConstraints(input, 1, 0); //place input in second column of first row
-   Button login = new Button("login");
+   Button login = new Button("Login");
    GridPane.setConstraints(login, 1, 1);
    operatorr.getChildren().addAll(operatorCode, input, login, back);
    opScene = new Scene(operatorr, 300, 200);
@@ -247,19 +246,27 @@ public class GUI extends Application {
  }
 
  public void setDisplay(int index, HBox box, ArrayList < String > productNames, ArrayList < Double > productPrices) {
-  Button back = new Button("Back");
-  			back.setOnAction(e -> primary.setScene(scene1));
-  Button buy = new Button("Buy");
-  LineItem[] lineItems = manager.getProductTypes();
-  buy.setOnAction(e -> {  AlertBox.display("Bought", "You have successfully purchased the product");
-                         primary.setScene(scene1);
-                          manager.buyItem(lineItems[index]);});
-  Label name = new Label(productNames.get(index));
-  Label nameIndicator = new Label("    Name: ");
-  Label priceIndicator = new Label("    Price: $");
-  Label price = new Label(Double.toString(productPrices.get(index)));
-  box.getChildren().clear();
-  box.getChildren().addAll(nameIndicator, name, priceIndicator, price, back, buy);
+  try {
+   Button back = new Button("Back");
+   back.setOnAction(e -> primary.setScene(scene1));
+   Button buy = new Button("Buy");
+   buy.setOnAction(e -> {
+    if (productPrices.get(index) < manager.getCurrentBalance()) {
+     AlertBox.display("Bought", "You have successfully purchased the product");
+     primary.setScene(scene1);
+     manager.buyItem(index);
+    } else {
+     AlertBox.display("Error", "Insuficcient Money");
+    }
+   });
+   Label name = new Label(productNames.get(index));
+   Label nameIndicator = new Label("    Name: ");
+   Label priceIndicator = new Label("    Price: $");
+   Label price = new Label(Double.toString(productPrices.get(index)));
+   box.getChildren().clear();
+   box.getChildren().addAll(nameIndicator, name, priceIndicator, price, back, buy);
+  } catch (Exception e) {
+   e.printStackTrace();
+  }
  }
-
 }
