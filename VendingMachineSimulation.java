@@ -17,13 +17,14 @@ import javafx.scene.control.*;
 public class VendingMachineSimulation{
 
     public static void main(String[] args) {
-      // int choice = Menu.chooseMenuType();
-      //           if (choice == 1) {
-      //               VendingManager manager = new VendingManager();
-      //               CLI cliMenu = new CLI();
-      //               cliMenu.run(manager);
-      //           } else if (choice == 2) {
-      launch(GUI, args);
+      int choice = Menu.chooseMenuType();
+                if (choice == 1) {
+                    VendingManager manager = new VendingManager();
+                    CLI cliMenu = new CLI();
+                    cliMenu.run(manager);
+                } else if (choice == 2) {
+      Application.launch(GUI.class, args);
+    }
     }
 
     // @Override

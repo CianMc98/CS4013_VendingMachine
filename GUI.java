@@ -12,17 +12,18 @@ import java.util.ArrayList;
 
 public class GUI extends Application{
 
-    Stage primaryStage;
+    Stage primary;
     Button fail;
     VBox layout;
     Button AddProducts = new Button("Add Product(s)");
     Button RemoveCoins = new Button("Remove Coins");
     protected ArrayList < Operator > operatorList = FileInputManager.getOperatorList();
     protected Operator operator = new Operator();
+
   @Override
-   public void start(Stage primary)
+   public void start(Stage primaryStage)
    {
-     primaryStage = primary;
+     primary = primaryStage;
      try{
       VendingManager manager = new VendingManager();
 		//scene for adding coins
@@ -37,13 +38,13 @@ public class GUI extends Application{
       layout1.getChildren().addAll(label1,fiftyCent,twentyCent,euro,twoEuro);
       coinScene = new Scene(layout1, 200, 200);
 
-      primaryStage.setTitle("Vending Machine");
+      primary.setTitle("Vending Machine");
       fail = new Button("Click Me");
       Button EnterCoins = new Button("Enter Coins");
       Button ViewProducts = new Button("View Products");
       fail.setOnAction(e -> AlertBox.display("Error", "Incorrect code."));
-      EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
-      EnterCoins.setOnAction(e -> primaryStage.setScene(coinScene));
+      EnterCoins.setOnAction(e -> primary.setScene(coinScene));
+      EnterCoins.setOnAction(e -> primary.setScene(coinScene));
       layout = new VBox();
       layout.getChildren().addAll(EnterCoins, ViewProducts);
 
@@ -68,13 +69,13 @@ public class GUI extends Application{
             if (operatorLevel == 1) {
                 layout.getChildren().add(AddProducts);
                 Scene scene = new Scene(layout, 300, 250);
-                primaryStage.setScene(scene);
-                primaryStage.show();
+                primary.setScene(scene);
+                primary.show();
             } else if (operatorLevel == 2) {
                 layout.getChildren().addAll(AddProducts, RemoveCoins);
                 Scene scene = new Scene(layout, 300, 250);
-                primaryStage.setScene(scene);
-                primaryStage.show();
+                primary.setScene(scene);
+                primary.show();
             }
 
         while (more) {
@@ -92,8 +93,8 @@ public class GUI extends Application{
         boolean more = true;
         Scene scene1 = new Scene(layout, 300, 250);
         try {
-          primaryStage.setScene(scene1);
-        primaryStage.show();
+          primary.setScene(scene1);
+        primary.show();
 
         while (more) {
 
